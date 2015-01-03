@@ -27,16 +27,10 @@
         (slime-flash-region2 (point)
                              (+ (point)
                                 (length form))))
-      
-      (slime-eval-async 
-       `(cl:progn
-          (cl:eval
-           (g000001.remove-method:make-remove-method-form-from-defmethod-form
-            (cl:read-from-string ,form)))
-          ())
-        (lambda (&rest args)
-          (message "remove-method Done..."))
-        (slime-current-package)))))
+      (slime-interactive-eval
+       (format
+        "(cl:eval (g000001.remove-method:make-remove-method-form-from-defmethod-form '%s))"
+        form)))))
 
 
 ;;; *EOF*
