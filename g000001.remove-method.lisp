@@ -28,7 +28,9 @@
 
 (Defun make-remove-method-form-from-defmethod-form (form)
   (Check-Type form (Cons (Eql Defmethod) (Cons Symbol *)))
-  (make-remove-method-form (Ensure-Generic-Function (Second form))
+  (make-remove-method-form (Ensure-Generic-Function (Second form)
+                                                    :generic-function-class
+                                                    (class-of (fdefinition (Second form))))
                            (Eval form)))
 
 
